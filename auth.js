@@ -1,57 +1,55 @@
 import { auth, db } from "./firebase.js";
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCRMcs2PvqRbxIVsDss5kQRJe8mD840cBM",
-  authDomain: "chat-f35b2.firebaseapp.com",
-  projectId: "chat-f35b2",
-  storageBucket: "chat-f35b2.firebasestorage.app",
-  messagingSenderId: "1006603779080",
-  appId: "1:1006603779080:web:3d6c4d83af8365e23665bd",
-  measurementId: "G-SVL5NXG3C9"
-};
-
-const app = initializeApp(firebaseConfig);
-
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
-}from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-import{
-    doc,
-    setDoc
+import {
+doc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-window.register = async function (){
+window.register = async function(){
 
-    let email=emailInput.value;
-    let pass=passwordInput.value;
-    let pseudo=pseudoInput.value;
+let email = document.getElementById("email").value;
+let pass = document.getElementById("password").value;
+let pseudo = document.getElementById("pseudo").value;
 
-    const user = await createUserWithEmailAndPassword(auth,email,pass);
+try{
 
-    await setDoc(doc(db,"users",user.user.uid),{
+const user = await createUserWithEmailAndPassword(auth,email,pass);
 
-        pseudo:pseudo,
-        email:email
+await setDoc(doc(db,"users",user.user.uid),{
+pseudo:pseudo,
+email:email
+});
 
-    });
+alert("Compte créé !");
 
-    alert ("Compte Créé");
+}catch(err){
+alert(err.message);
+}
 
 }
 
 window.login = async function(){
 
-    let email = emailInput.value;
-    let pass = passwordInput.value;
+let email = document.getElementById("email").value;
+let pass = document.getElementById("password").value;
 
-    await signInWithEmailAndPassword(auth,email,pass);
+try{
 
-    window.location="chat.html";
+await signInWithEmailAndPassword(auth,email,pass);
+
+window.location="chat.html";
+
+}catch(err){
+alert(err.message);
+}
 
 }
+
+
 
 
