@@ -1,5 +1,9 @@
 import { auth, db } from "./firebase.js";
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+const app = initializeApp(firebaseConfig);
+
 import {
 createUserWithEmailAndPassword,
 signInWithEmailAndPassword
@@ -37,4 +41,5 @@ window.login = async function(){
     await signInWithEmailAndPassword(auth,email,pass);
 
     window.location="chat.html";
+
 }
