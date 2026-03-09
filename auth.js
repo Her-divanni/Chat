@@ -10,7 +10,7 @@ const firebaseConfig = {
   messagingSenderId: "1006603779080",
   appId: "1:1006603779080:web:3d6c4d83af8365e23665bd",
   measurementId: "G-SVL5NXG3C9"
-}
+};
 
 const app = initializeApp(firebaseConfig);
 
@@ -53,4 +53,5 @@ window.login = async function(){
     window.location="chat.html";
 
 }
+
 
